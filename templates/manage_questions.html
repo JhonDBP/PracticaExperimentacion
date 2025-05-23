@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h2 class="mb-4">Administrar Preguntas</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Pregunta</th>
+            <th>Correcta</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for question in questions %}
+        <tr>
+            <td>{{ question[0] }}</td>
+            <td>{{ question[1] }}</td>
+            <td>{{ question[6] }}</td>
+            <td>
+                <a href="{{ url_for('edit_question', question_id=question[0]) }}" class="btn btn-sm btn-warning">Editar</a>
+                <a href="{{ url_for('delete_question', question_id=question[0]) }}" class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro de que quieres eliminar esta pregunta?');">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{{ url_for('add_question') }}" class="btn btn-primary mt-3">Agregar nueva pregunta</a>
+{% endblock %}

@@ -1,0 +1,8 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h2>¡Juego terminado!</h2>
+<p>Gracias por jugar, <strong>{{ session['player_name'] }}</strong>.</p>
+<p>Tu puntaje final fue: <strong>{{ score }}</strong></p>
+<a href="{{ url_for('welcome') }}" class="btn btn-secondary mt-3">Volver a comenzar</a>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h2>Agregar nueva pregunta</h2>
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div class="alert alert-success">
+      {{ messages[0] }}
+    </div>
+  {% endif %}
+{% endwith %}
+
+<form method="POST">
+    <div class="mb-3">
+        <label>Pregunta:</label>
+        <input type="text" class="form-control" name="question" required>
+    </div>
+    <div class="mb-3">
+        <label>Opción A:</label>
+        <input type="text" class="form-control" name="option_a" required>
+    </div>
+    <div class="mb-3">
+        <label>Opción B:</label>
+        <input type="text" class="form-control" name="option_b" required>
+    </div>
+    <div class="mb-3">
+        <label>Opción C:</label>
+        <input type="text" class="form-control" name="option_c" required>
+    </div>
+    <div class="mb-3">
+        <label>Opción D:</label>
+        <input type="text" class="form-control" name="option_d" required>
+    </div>
+    <div class="mb-3">
+        <label>Respuesta correcta (A, B, C o D):</label>
+        <input type="text" class="form-control" name="correct" maxlength="1" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+</form>
+{% endblock %}

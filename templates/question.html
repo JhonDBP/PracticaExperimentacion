@@ -1,0 +1,61 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Jugador: {{ session['player_name'] }}</h2>
+    <h4>Pregunta actual</h4>
+    <form method="POST" action="{{ url_for('feedback', question_id=question[0]) }}">
+        <div class="mb-3">
+            <p><strong>{{ question[1] }}</strong></p>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="answer" value="A" required>
+                <label class="form-check-label">{{ question[2] }}</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="answer" value="B" required>
+                <label class="form-check-label">{{ question[3] }}</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="answer" value="C" required>
+                <label class="form-check-label">{{ question[4] }}</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="answer" value="D" required>
+                <label class="form-check-label">{{ question[5] }}</label>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Enviar</button>
+    </form>
+
+    <hr class="my-4">
+
+    <h5>📋 Todas las preguntas</h5>
+    <table class="table table-dark table-striped table-bordered table-sm">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Pregunta</th>
+                <th>Correcta</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for q in all_questions %}
+            <tr>
+                <td>{{ q[0] }}</td>
+                <td>{{ q[1] }}</td>
+                <td>{{ q[6] }}</td>
+                <td>
+                    <a href="{{ url_for('edit_question', question_id=q[0]) }}" class="btn btn-sm btn-warning">Editar</a>
+                    {% if q[0] != question[0] %}
+                    <a href="{{ url_for('delete_question', question_id=q[0]) }}" class="btn btn-sm btn-danger">Eliminar</a>
+                    {% else %}
+                    <span class="text-muted">Respondiendo</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

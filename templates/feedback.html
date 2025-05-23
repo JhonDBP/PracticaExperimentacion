@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h2>
+    {% if is_correct %}
+        ✅ ¡Correcto!
+    {% else %}
+        ❌ Incorrecto
+    {% endif %}
+</h2>
+
+<p><strong>Pregunta:</strong> {{ question[1] }}</p>
+
+<p><strong>Tu respuesta:</strong> {{ selected }}. {{ question[2 if selected == 'A' else 3 if selected == 'B' else 4 if selected == 'C' else 5] }}</p>
+<p><strong>Respuesta correcta:</strong> {{ question[6] }}. {{ question[2 if question[6] == 'A' else 3 if question[6] == 'B' else 4 if question[6] == 'C' else 5] }}</p>
+
+<a href="{{ url_for('next_question') }}" class="btn btn-primary mt-3">Siguiente pregunta</a>
+{% endblock %}

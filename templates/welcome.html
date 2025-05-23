@@ -1,0 +1,12 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h2>Bienvenido al Juego de Trivia</h2>
+<form method="POST" action="/">
+    <div class="mb-3">
+        <label for="player_name" class="form-label">Tu nombre:</label>
+        <input type="text" class="form-control" id="player_name" name="player_name" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Comenzar</button>
+</form>
+{% endblock %}
