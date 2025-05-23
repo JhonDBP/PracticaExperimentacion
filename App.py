@@ -24,6 +24,9 @@ def welcome():
 
 @app.route('/question')
 def next_question():
+    if 'question_ids' not in session:
+        session['question_ids'] = []
+
     cur = mysql.connection.cursor()
     cur.execute('SELECT id FROM questions')
     all_ids = [row[0] for row in cur.fetchall()]
@@ -34,13 +37,16 @@ def next_question():
 
     question_id = random.choice(available_ids)
     session['question_ids'].append(question_id)
+    session.modified = True  # << Para asegurar que la sesión se actualiza correctamente
 
     cur.execute('SELECT * FROM questions WHERE id = %s', (question_id,))
     question = cur.fetchone()
     cur.execute('SELECT * FROM questions')
     all_questions = cur.fetchall()
 
-    return render_template('question.html', question=question, questions=all_questions)
+    return render_template('question.html', question=question, all_questions=all_questions)
+
+
 
 @app.route('/add_question', methods=['GET', 'POST'])
 def add_question():
